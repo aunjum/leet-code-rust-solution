@@ -1,0 +1,85 @@
+use std::collections::HashMap;
+use std::io;
+
+fn main() {
+    let mut num = Vec::new();
+    let mut hnum = HashMap::new();
+    let target = 9;
+    num.push(2);
+    num.push(7);
+    num.push(11);
+    num.push(15);
+    
+    for x in &num {
+        hnum.insert(x, x);
+    }
+    
+    println!("{:?}", num);
+    println!("{:?}", hnum);
+    
+    for i in 0..num.len() {
+        if target-num[i] != num[i] {
+            if hnum.contains_key(&(target - num[i])) {
+                println!("{}", i);
+            }
+        }
+    }
+}
+
+//////////////////////////////////////////////
+use std::collections::HashMap;
+
+#[allow(unused_macros)]
+macro_rules! read {
+    ($out:ident as $type:ty) => {
+        let mut inner = String::new();
+        std::io::stdin().read_line(&mut inner).expect("A String");
+        let $out = inner.trim().parse::<$type>().expect("Parsable");
+    };
+}
+
+#[allow(unused_macros)]
+macro_rules! read_str {
+    ($out:ident) => {
+        let mut inner = String::new();
+        std::io::stdin().read_line(&mut inner).expect("A String");
+        let $out = inner.trim();
+    };
+}
+
+#[allow(unused_macros)]
+macro_rules! read_vec {
+    ($out:ident as $type:ty) => {
+        let mut inner = String::new();
+        std::io::stdin().read_line(&mut inner).unwrap();
+        let $out = inner
+            .trim()
+            .split_whitespace()
+            .map(|s| s.parse::<$type>().unwrap())
+            .collect::<Vec<$type>>();
+    };
+}
+fn main() {
+    read_vec!(num as i32);
+    read!(target as i32);
+    let mut hnum = HashMap::new();
+    
+    for x in &num {
+        hnum.insert(x, x);
+    }
+    
+    for i in 0..num.len() {
+        if target-num[i] != num[i] {
+            if hnum.contains_key(&(target - num[i])) {
+                println!("{}", i);
+            }
+        }
+    }
+}
+
+////////////////////////////////////
+/// 2 <= nums.length <= 104
+/// -109 <= nums[i] <= 109
+/// -109 <= target <= 109
+/// 
+/// 
